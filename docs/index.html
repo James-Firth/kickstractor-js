@@ -1,13 +1,17 @@
 <html>
-  <body>
-<ol>
-  <li>Drag the button below into your browsers bookmarks bar</li>
-  <li>Open the kickstarter page you want to get data from</li>
-  <li>Click the bookmark</li>
-  <li>Click the big green button, it will extract info and copy it to your clipboard</li>
-  <li>Paste that into a google sheet or excel with the following columns</li>
-</ol>
-<div>id,	project name,	Project link,	project link as html (broken),	Project Description,	Backer count,	Project goal,	Percentage of goal,	Location,	thumbnail link</div>
-    <a id='bookmarklet' href="javascript: (function jameskickstarter(){const getProjectDataAsCSV=()=>{const project=window.current_project.data,id=project.id,name=project.name,description=project.blurb,backerCount=project.backers_count,pledgedHomeAmount=project.pledged,goal=project.goal,pledged=project.pledged,percentageOfGoal=pledged/goal*100,usdPledged=project.usd_pledged,thumbnailLink=project.photo.thumb,projectLink=`https://www.kickstarter.com/projects/${project.creator.slug}/${project.slug}`,location=project.location.short_name;return{stringData:[id,name,projectLink,description,backerCount,goal,percentageOfGoal,location,thumbnailLink].join(\"\t\"),data:{id:id,name:name,projectLink:projectLink,description:description,backerCount:backerCount,goal:goal,percentageOfGoal:percentageOfGoal,location:location,thumbnailLink:thumbnailLink}}},copyToClipboard=str=>{const el=document.createElement(\"textarea\");el.value=str,el.setAttribute(\"readonly\",\"\"),el.style.position=\"absolute\",el.style.left=\"-9999px\",document.body.appendChild(el),el.select(),document.execCommand(\"copy\"),document.body.removeChild(el)},resetText=(x=\"\")=>{$(\"#copybtn\").text(`Copied!\n`)};$(\"html\").append('<div id=\"copybtn\" style=\"position: fixed;background-color: greenyellow;right: 50%;top: 50%;z-index: 100;padding: 0.3em;border-radius: 0.3em;cursor: pointer;box-shadow: 1px 3px 3px #39c60e;text-align: center; margin: auto; font-size: 20px;\">Click to Copy Project Data to Clipboard</div>'),document.getElementById(\"copybtn\").onclick=()=>{const projectData=getProjectDataAsCSV();console.log(projectData.stringData),copyToClipboard(projectData.stringData),resetText(\"Now paste into Google Doc\")}})();">+ Drag to bookmark bar</a>
-  </body>
+
+<body>
+  <ol>
+    <li>Drag the button below into your browsers bookmarks bar</li>
+    <li>Open the kickstarter page you want to get data from</li>
+    <li>Click the bookmark</li>
+    <li>Click the big green button, it will extract info and copy it to your clipboard</li>
+    <li>Paste that into a google sheet or excel with the following columns</li>
+  </ol>
+  <div>id, project name, Project link, project link as html (broken), Project Description, Backer count, Project goal,
+    Percentage of goal, Location, thumbnail link</div>
+  <a id='bookmarklet'
+    href="javascript: (function jameskickstarter(){const getProjectDataAsCSV=()=>{const project=window.current_project.data,id=project.id,name=project.name,description=project.blurb,backerCount=project.backers_count,pledgedHomeAmount=project.pledged,goal=project.goal,pledged=project.pledged,percentageOfGoal=pledged/goal*100,usdPledged=project.usd_pledged,thumbnailLink=project.photo.thumb,projectLink=`https://www.kickstarter.com/projects/${project.creator.slug}/${project.slug}`,projectLinkHtml=`<a href=''></a>`,location=project.location.short_name;return[id,name,projectLink,projectLinkHtml,description,backerCount,goal,percentageOfGoal,location,thumbnailLink].join('\t')},copyToClipboard=str=>{const el=document.createElement('textarea');el.value=str,el.setAttribute('readonly',''),el.style.position='absolute',el.style.left='-9999px',document.body.appendChild(el),el.select(),document.execCommand('copy'),document.body.removeChild(el)},resetText=()=>{$('#copybtn').text('Copied!')};$('html').append('<div id='copybtn' style='position: fixed;background-color: greenyellow;right: 50%;top: 50%;z-index: 100;padding: 0.3em;border-radius: 0.3em;cursor: pointer;box-shadow: 1px 3px 3px #39c60e;'>Click to Copy Project Data to Clipboard</div>'),document.getElementById('copybtn').onclick=()=>{const projectData=getProjectDataAsCSV();console.log(projectData),copyToClipboard(projectData),resetText()}})();">+ Drag to bookmark bar</a>
+</body>
+
 </html>
